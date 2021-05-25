@@ -88,11 +88,11 @@ elseif 38<=ID
     T=4;
     switch ID
         case 38
-            extras='default m0s=0.1';
+            extras='default m0s=0.1 tag=default';
         case 39
-            extras='T1+T2f m0s=0.1';
+            extras='T1+T2f m0s=0.1 tag=T1T2f';
         case 40
-            extras='R-only';
+            extras='R-only tag=R';
     end
 end
 end
