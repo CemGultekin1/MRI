@@ -307,7 +307,7 @@ I=eye(8);
 FI=F\I(:,2:4);
 C=diag(FI(2:4,:)); % Relative CRB values
 
-if contains(extras,'T1+T2f')
+if contains(extras,'T1pT2f')
     FI=F\I(:,3:4);
     C=diag(FI(3:4,:));
 elseif contains(extras, 'R-only')

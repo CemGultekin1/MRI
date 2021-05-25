@@ -14,7 +14,6 @@ alphaseq=rand(rfnum,1)*pi+pi;
 TRFseq=rand(rfnum,1)*(TRFmax-5e-5)+5e-5;
 X=[alphaseq,TRFseq];
 Tstr=strrep(num2str(T),'.','p');
-rng(0);
 samples=Bloch.sample_parameter_space(sample_num,TR,extras);
 sweepnum=2;
 basis=randn((rfnum+1)*2*sweepnum,basis_size)/sqrt((rfnum+1)*2*sweepnum);

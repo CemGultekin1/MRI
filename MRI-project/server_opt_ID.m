@@ -93,6 +93,8 @@ elseif 38<=ID
             extras='T1+T2f m0s=0.1 tag=T1T2f';
         case 40
             extras='R-only tag=R';
+        case 41
+            extras='T1pT2f m0s=0.1 tag=T1pT2f';
     end
 end
 end
