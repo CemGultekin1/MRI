@@ -10,7 +10,7 @@ TRFmax=5e-4;
 %smc=50;
 rfnum=ceil(T/TR);
 rng(0);
-alphaseq=rand(rfnum,1)*pi+pi;
+alphaseq=(rand(rfnum,1)*pi+pi)*0.2;
 TRFseq=rand(rfnum,1)*(TRFmax-5e-5)+5e-5;
 X=[alphaseq,TRFseq];
 Tstr=strrep(num2str(T),'.','p');
