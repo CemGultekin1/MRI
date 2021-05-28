@@ -60,7 +60,7 @@ else
     end
 end
 save(filename,'history');
-splinenum=ceil(50/666*rfnum);
+splinenum=ceil(10/666*rfnum);%ceil(50/666*rfnum);
 sweepnum=2;
 S=Bloch.spline_basis(linspace(0,1,rfnum).',splinenum,'hann');
 [S,~]=qr(S,0);

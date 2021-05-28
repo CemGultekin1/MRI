@@ -306,20 +306,23 @@ I=eye(8);
 %F=F+I;
 FI=F\I(:,2:4);
 C=diag(FI(2:4,:)); % Relative CRB values
-
+CTOT=sum(C);
 if contains(extras,'T1pT2f')
     FI=F\I(:,3:4);
-    C=diag(FI(3:4,:));
+    C_=diag(FI(3:4,:));
+    CTOT=sum(C_);
 elseif contains(extras, 'R-only')
     FI=F\I(:,5);
-    C=diag(FI(5,:));
+    C_=diag(FI(5,:));
+    CTOT=sum(C_);
 elseif contains(extras, 'default')
     FI=F\I(:,2:4);
-    C=diag(FI(2:4,:));
+    C_=diag(FI(2:4,:));
+    CTOT=sum(C_);
 end
 
 
-CTOT=sum(C);
+
 if order==1
     grads=[];
     return;

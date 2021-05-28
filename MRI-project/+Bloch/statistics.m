@@ -1,9 +1,9 @@
-function CRBvals=statistics(name,sample_num1,sample_num2,control,basis)
+function C=statistics(sample_num1,sample_num2,control,basis,extras)
 TR=3.5e-3;
 TRFmax=5e-4;
-sweep_phase=[-0.3,0,0.3]*pi;
+sweep_phase=[-0.3,0.3]*pi;
 rng(0);
-samples=Bloch.sample_parameter_space(sample_num2,TR);
+samples=Bloch.sample_parameter_space(sample_num2,TR,extras);
 samples={samples{sample_num1+1:sample_num2}};
 sample_num=sample_num2-sample_num1;
 order=1;
@@ -39,17 +39,11 @@ if pastver
     disp(['          computing version index: ' , num2str(length(past_versions)),'/',num2str(length(past_versions)), '...']);
 end
 %}
-if exist('basis','var')
-    parfor i=1:sample_num
-         [~,C(:,i),~]=Bloch.simulate_multishooting(samples{i},TR,TRFmax,sweep_phase,control,order,basis);
-    end
-else
-    parfor i=1:sample_num
-         [~,C(:,i),~]=Bloch.simulate_multishooting(samples{i},TR,TRFmax,sweep_phase,control,order);
-    end
+
+
+parfor i=1:sample_num
+    [~,C(:,i)]=Bloch.simulate(samples{i},TR,TRFmax,sweep_phase,control,order,basis,extras);
 end
-CRBs{end}=C;
-CRBvals=struct('name',cell(length(CRBs),1),'CRB',CRBs);
 %{
 if pastver
     for i=1:length(CRBvals)-1
@@ -61,6 +55,5 @@ if pastver
     end
 end
 %}
-CRBvals(end).name=name;
-CRBvals(end).CRB=CRBvals(end).CRB*(size(control,1)+1)*TR;
+C=C*(size(control,1)+1)*TR;
 end
