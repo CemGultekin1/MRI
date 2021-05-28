@@ -1,4 +1,4 @@
-function [T,bss,SARMAX,extras]=server_opt_ID(ID)
+function [T,bss,SARMAX,readfile,extras]=server_opt_ID(ID)
 SARMAX_v5=2.8278e+05*2;
 % primary concern:
 extras='';
@@ -72,7 +72,7 @@ elseif 37>=ID  && ID>=27
     Tstr=strrep(num2str(T),'.','p');
     sarstr=num2str(SARMAX,'%.2e');
     sarstr=strrep(strrep(sarstr,'.','p'),'+','');
-    readfile=['2021_01_16_T',Tstr,'_b',num2str(bss),'_SAR',sarstr,'.mat'];
+    readfile=['2021_01_16_T',Tstr,'_b',num2str(bss),'_SAR',sarstr];
     if exist(readfile,'file')==2
         load(readfile,'history');
         control=history.control;
@@ -90,11 +90,18 @@ elseif 38<=ID
         case 38
             extras='default m0s=0.1 tag=default';
         case 39
-            extras='T1+T2f m0s=0.1 tag=T1T2f';
+            extras='T1pT2f m0s=0.1 tag=T1pT2f';
         case 40
             extras='R-only tag=R';
-        case 41
-            extras='T1pT2f m0s=0.1 tag=T1pT2f';
     end
+    Tstr=strrep(num2str(T),'.','p');
+    sarstr=num2str(SARMAX,'%.2e');
+    sarstr=strrep(strrep(sarstr,'.','p'),'+','');
+    writefile=['2021_05_27_T',Tstr,'_b',num2str(bss),'_SAR',sarstr];
+    if ~isempty(extras)
+        addthis=strfind(extras,'tag=');
+        writefile=strcat(writefile, ['_',extras(addthis+4:end)]);
+    end
+    readfile=writefile;
 end
 end

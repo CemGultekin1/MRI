@@ -9,6 +9,6 @@
 #SBATCH --error=job_stat_%a.err
 
 
-module unload matlab
-module load matlab/R2018a
-matlab -nodesktop -singleCompThread -r  "server_bloch_multi_statistics(${SLURM_ARRAY_TASK_ID},5)" < /dev/null
+module purge
+module load matlab/2020b
+matlab -nodesktop -singleCompThread -r  "server_m0svalue_tests(${SLURM_ARRAY_TASK_ID},5)" < /dev/null

@@ -9,6 +9,6 @@
 #SBATCH --error=job_%a.err
 
 
-module unload matlab
-module load matlab/R2018a
+module purge
+module load matlab/2020b
 matlab -nodesktop -singleCompThread -r  "server_bloch_multi(${SLURM_ARRAY_TASK_ID},40)" < /dev/null

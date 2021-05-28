@@ -1,0 +1,27 @@
+function server_bloch_multi_statistics(ID,cpu_num,extras)
+[T,bss,SARMAX,readfile,~ ]=server_opt_ID(ID);
+
+
+if ~contains(filename,'finalized')
+    load(filename,'history');
+    x=history.control;
+    if isfield(history,'basis')
+        basis=history.basis;
+    end
+else
+    load(filename,'x');
+end
+
+name=strrep(fileroot,'*','');
+ii=strfind(filename,'.')-1;
+writeaddress=[filename(1:ii(end)),'_analysis_folder_',extras];
+S=dir(writeaddress);
+if isempty(S)
+    mkdir(writeaddress);
+end
+
+
+sample_num=5000;
+server_bloch_analysis(readfile,sample_num,500,cpu_num,extras);
+end
+
