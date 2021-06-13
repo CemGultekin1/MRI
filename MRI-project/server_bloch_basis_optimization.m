@@ -1,20 +1,23 @@
-function server_bloch_basis_optimization(ID,bss,cpu_num)
+function server_bloch_basis_optimization(ID,cpu_num,extras)
 if cpu_num>0
     parpool(cpu_num);
 end
-bsi=ceil(ID/100);
-basis_size=bss(bsi);
-ID=mod(ID,100);
-readfolder=['2020_ID_',num2str(ID),'_data'];
-sweepnum=2;
-%switch sweepnum
-    %case 3
-        writefile=['2020_ID_',num2str(ID),'_data/','optimized_basis_',num2str(basis_size)];
-    %case 2
-        %writefile=['2020_ID_',num2str(ID),'_data/','optimized_basis_sw2_',num2str(basis_size)];
-%end
+
+[T,bss,SARMAX,readfile,extras1]=server_opt_ID(ID);
+extras=strcat(extras,' ', extras1);
+jj=strfind(extras,'tag=');
+jj=jj(end)+4;
+if ~isempty(extras)
+    writeaddress=[readfile,'_analysis_folder_',extras(jj:end)];
+else
+    writeaddress=[readfile,'_analysis_folder'];
+end
+readfolder=writeaddress;
+writefile=strcat(readfile,'_bopt',string(bss));
+
+
 Bloch.fmincon_optimize_basis(...
             readfolder,writefile,...
-            basis_size);
+            bss,T,extras);
 end
 

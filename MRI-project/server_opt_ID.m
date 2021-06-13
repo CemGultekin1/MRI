@@ -59,11 +59,25 @@ elseif ID>=23 && ID<=26
     end
     control=past_versions(ID2).control;
     control=[control(1:end-1,1)+control(2:end,1),control(1:end-1,2)];
+    control=[control;control(1,:)];
     rfnum=size(control,1);
-    T=TR*(rfnum+1);
-    bss=[];
+    T=TR*rfnum;
+    bss=9;
     SARMAX=[];
     tag=past_versions(ID2).name;
+    history=struct('control',control);
+    readfile=tag;
+    save(readfile,'history');
+    %{
+    load(readfile,'history');
+    x=history.control;
+    if isfield(history,'basis')
+        basis=history.basis;
+    else
+        basis=[];
+    end
+    %}
+
 elseif 37>=ID  && ID>=27
     SARMAX=0.6*SARMAX_v5;
     bss=9;

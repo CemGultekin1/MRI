@@ -7,8 +7,14 @@
 #SBATCH --mem=50GB
 #SBATCH --output=job_stat_%a.out
 #SBATCH --error=job_stat_%a.err
-
+#SBATCH --array=25,38,39,40
 
 module purge
 module load matlab/2020b
-matlab -nodesktop -singleCompThread -r  "server_m0svalue_tests(${SLURM_ARRAY_TASK_ID},5)" < /dev/null
+if %SLURM_ARRAY_TASK_ID%<38 (
+matlab -nodesktop -singleCompThread -r  "server_bloch_multi_statistics(${SLURM_ARRAY_TASK_ID},5,'m0s=0.1 tag=m0s0p1')" < /dev/null
+matlab -nodesktop -singleCompThread -r  "server_bloch_multi_statistics(${SLURM_ARRAY_TASK_ID},5,'')" < /dev/null
+) else (
+matlab -nodesktop -singleCompThread -r  "server_bloch_multi_statistics(${SLURM_ARRAY_TASK_ID},5,'')"< /dev/null
+) 
+

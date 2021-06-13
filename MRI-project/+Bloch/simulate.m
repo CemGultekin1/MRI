@@ -286,7 +286,7 @@ if order==0
     return;
 end
 %% Computing rel CRB
-fng=fingerprints;
+fng=fingerprints;% 2,8,rf+1,sweepnum
 fng=reshape(fng,2,8,[]);% 2,8,rf+1,sweepnum
 fng=permute(fng,[2,1,3]); % 8,2,rf+1,sweepnum
 %phase_weights=reshape(phase_weights,1,[]);
@@ -297,7 +297,7 @@ if basis_flag
     basis_flag=~isempty(basis);
 end
 if basis_flag
-    bfng=basis{1}*(basis{1}.'*fng);
+    bfng=basis{1}*(basis{1}.'*fng); % 2*rf+1 *sweepnum,8
     F=bfng.'*bfng;
 else
     F=fng.'*fng;

@@ -1,4 +1,4 @@
-function C=statistics(sample_num1,sample_num2,control,basis,extras)
+function [fingerprints,C]=statistics(sample_num1,sample_num2,control,basis,extras)
 TR=3.5e-3;
 TRFmax=5e-4;
 sweep_phase=[-0.3,0.3]*pi;
@@ -40,9 +40,15 @@ if pastver
 end
 %}
 
-
-parfor i=1:sample_num
-    [~,C(:,i)]=Bloch.simulate(samples{i},TR,TRFmax,sweep_phase,control,order,basis,extras);
+C=zeros(3,sample_num);
+i=1;
+[ff,C(:,i)]=Bloch.simulate(samples{i},TR,TRFmax,sweep_phase,control,order,basis,extras);
+%disp(size(ff))
+fingerprints=zeros(length(ff(:)),sample_num);
+fingerprints(:,i)=ff(:);
+parfor i=2:sample_num
+    [fung,C(:,i)]=Bloch.simulate(samples{i},TR,TRFmax,sweep_phase,control,order,basis,extras);
+    fingerprints(:,i)=fung(:);
 end
 %{
 if pastver
