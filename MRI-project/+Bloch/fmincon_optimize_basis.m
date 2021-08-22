@@ -142,8 +142,8 @@ for i=1:length(S)
     totsnum=totsnum+snum;
     CC=zeros(snum,1);
     ff=zeros(sbnum*2*sweepnum,bs,snum);
+    %for j=1:snum
     for j=1:snum
-    %parfor j=1:snum
         fingerprints=fpg(:,j);
         
         % (2,8,rf+1,sweepnum)

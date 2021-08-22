@@ -17,9 +17,8 @@ for i=2:n
             while (m0s<0)
                 m0sflag=1;
                 if ~isempty(extras)
-                    dd=strfind(extras,'m0s=');
-                    if ~isempty(dd)
-                       m0s=str2num(extras(dd+4:dd+6));
+                    if contains(extras,'m0s')
+                       m0s=0.1;%str2num(extras(dd+4:dd+6));
                        m0sflag=0;
                     end
                 end

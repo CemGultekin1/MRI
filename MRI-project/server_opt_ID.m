@@ -67,7 +67,7 @@ elseif ID>=23 && ID<=26
     tag=past_versions(ID2).name;
     history=struct('control',control);
     readfile=tag;
-    save(readfile,'history');
+    %save(readfile,'history');
     %{
     load(readfile,'history');
     x=history.control;
