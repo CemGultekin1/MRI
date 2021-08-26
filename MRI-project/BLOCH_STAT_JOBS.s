@@ -7,7 +7,7 @@
 #SBATCH --mem=50GB
 #SBATCH --output=job_stat_%a.out
 #SBATCH --error=job_stat_%a.err
-#SBATCH --array=25,38,39,40
+#SBATCH --array=23-26,38-40
 
 module purge
 module load matlab/2020b
