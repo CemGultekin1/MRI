@@ -1,4 +1,4 @@
-function server_bloch_multi_statistics(ID,cpu_num,extras)
+function server_bloch_multi_statistics(ID,cpu_num,write_root,extras)
 [T,bss,SARMAX,readfile,extras1]=server_opt_ID(ID);
 extras=strcat(extras,' ', extras1);
 load(readfile,'history');
@@ -13,9 +13,9 @@ end
 if ~isempty(extras)
     jj=strfind(extras,'tag=');
     jj=jj(end)+4;
-    writeaddress=[readfile,'_analysis_folder_',extras(jj:end)];
+    writeaddress=[write_root,readfile,'_analysis_folder_',extras(jj:end)];
 else
-    writeaddress=[readfile,'_analysis_folder'];
+    writeaddress=[write_root,readfile,'_analysis_folder'];
 end
 S=dir(writeaddress);
 if isempty(S)
