@@ -24,8 +24,8 @@ if isempty(S)
 end
 
 
-samplenum=5000;
-batch_size=500;
+samplenum=10;%5000;
+batch_size=2;%500;
 if cpu_num>0
     parpool(cpu_num);
 end
