@@ -1,5 +1,5 @@
 function server_bloch_multi_statistics(ID,cpu_num,extras)
-write_root='/scratch/cg3306/MRI-data/';
+write_root='/scratch/cg3306/MRI/MRI-data/';
 [T,bss,SARMAX,readfile,extras1]=server_opt_ID(ID);
 extras=strcat(extras,' ', extras1);
 load(readfile,'history');
