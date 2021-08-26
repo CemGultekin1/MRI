@@ -11,10 +11,10 @@
 
 module purge
 module load matlab/2020b
-if %SLURM_ARRAY_TASK_ID%<38 (
+if[%SLURM_ARRAY_TASK_ID%<38]; then
 matlab -nodesktop -singleCompThread -r  "server_bloch_multi_statistics(${SLURM_ARRAY_TASK_ID},5,'tag=m0s0p1')" < /dev/null
 matlab -nodesktop -singleCompThread -r  "server_bloch_multi_statistics(${SLURM_ARRAY_TASK_ID},5,'')" < /dev/null
-) else (
+else
 matlab -nodesktop -singleCompThread -r  "server_bloch_multi_statistics(${SLURM_ARRAY_TASK_ID},5,'')"< /dev/null
-) 
+fi
 
